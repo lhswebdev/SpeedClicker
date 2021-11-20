@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 
-  export let gameTime = 1;
+  export let gameTime = 5;
 
   const dispatch = createEventDispatcher();
 

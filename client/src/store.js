@@ -12,12 +12,14 @@ export const highscore = derived(lastScore, $lastScore =>
 );
 
 export const leaderboard = readable(/** @type {LeaderboardEntry[]} */ ([]), set => {
-  const interval = setInterval(() => {
+  const updateLeaderboard = () => {
     // fetch leaderboard and set store
     fetch('/leaderboard')
       .then(response => response.json())
       .then(data => set(data));
-  }, 10 * 1000);
+  };
+  updateLeaderboard();
+  const interval = setInterval(updateLeaderboard, 10 * 1000);
   set([{
     name: 'anon',
     score: 69,
