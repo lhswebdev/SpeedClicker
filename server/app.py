@@ -1,6 +1,9 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import sqlite3
 
@@ -23,7 +26,10 @@ def databaseSetup ():
     conn.commit()
     conn.close()
 databaseSetup()
+
 app = FastAPI()
+if "CLIENT_DIR" in os.environ:
+    app.mount("/public", StaticFiles(directory=os.environ["CLIENT_DIR"]), name="pub")
 
 origins = [
     "http://localhost:5000",
