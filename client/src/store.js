@@ -14,6 +14,9 @@ export const highscore = derived(lastScore, $lastScore =>
 export const leaderboard = readable(/** @type {LeaderboardEntry[]} */ ([]), set => {
   const interval = setInterval(() => {
     // fetch leaderboard and set store
+    fetch('http://127.0.0.1:8000/leaderboard')
+      .then(response => response.json())
+      .then(data => set(data));
   }, 10 * 1000);
   set([{
     name: 'anon',
@@ -25,7 +28,8 @@ export const leaderboard = readable(/** @type {LeaderboardEntry[]} */ ([]), set 
 
 highscore.subscribe($highscore => {
   if ($highscore == null) return;
-  const result = { highscore: $highscore, timestamp: Date.now(), name: get(displayName) };
+  const result = { highscore: $highscore, name: get(displayName) };
   // FIXME replace with actual fetch call
+  fetch('http://clicker.sagg.in:8003/highscore', {method: 'POST', headers: {'Content-Type': 'application/json',},body: JSON.stringify(result)})
   console.log('UPLOADING TO SERVER:', result);
 });
