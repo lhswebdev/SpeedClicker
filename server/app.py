@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
 
 from fastapi import FastAPI
-from fastapi.responses import UJSONResponse
+from fastapi.responses import HTMLResponse, UJSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -28,8 +29,7 @@ def databaseSetup ():
 databaseSetup()
 
 app = FastAPI()
-if "CLIENT_DIR" in os.environ:
-    app.mount("/public", StaticFiles(directory=os.environ["CLIENT_DIR"]), name="pub")
+app_dir = os.environ.get("CLIENT_DIR", str(Path(__file__).parent / "../client/public"))
 
 origins = [
     "http://localhost:5000",
@@ -61,3 +61,5 @@ def addLeaderboard (score: Score):
     cur.execute("INSERT INTO leaderboard (name, score) VALUES (?, ?);", (score.name, score.highscore))
     cur.commit()
     cur.close()
+
+app.mount('/', StaticFiles(directory=app_dir, html=True), name="static")
