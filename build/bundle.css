@@ -1,0 +1,5 @@
+.info.svelte-buykdq{display:flex;flex-direction:column;margin-bottom:1rem}.two-col.svelte-buykdq{display:flex;flex-direction:row;gap:3rem}
+div.svelte-1de7ilt button{width:20rem;height:5rem}button.svelte-1de7ilt{position:relative;z-index:1}button.svelte-1de7ilt::after{content:'';position:absolute;top:0;left:0;width:20rem;height:5rem;background-color:#02b1f7;z-index:-1;transition:transform 200ms ease-in;transform:scaleX(0);transform-origin:right}button.svelte-1de7ilt:not([disabled]):hover::after{transform:scaleX(1);transform-origin:left}button.clicked.svelte-1de7ilt::after{transform:scaleX(0) !important;transform-origin:right !important}
+table.svelte-1fhdtrz,th.svelte-1fhdtrz,td.svelte-1fhdtrz{border:1px solid black;border-collapse:collapse;padding:.2rem}th.svelte-1fhdtrz{font-size:1.5rem}
+
+/*# sourceMappingURL=bundle.css.map */
