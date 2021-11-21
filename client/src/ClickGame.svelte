@@ -5,6 +5,7 @@
 
   export let disabled = false;
 
+  // whether it's clicked
   let clicked = false;
 
   const GameState = {
